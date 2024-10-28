@@ -155,6 +155,10 @@ class VelocityComponent extends React.Component {
   // This can cause a serious memory leak, keeping references to unmounted elements as well
   // completion handlers and associated react objects. This crudely clears these references.
   _clearVelocityCache(target) {
+    if(!target){
+        console.error('_clearVelocityCache called with empty target -> skip', this);
+        return;
+    }
     if (target.length) {
       _.forEach(target, this._clearVelocityCache);
     } else {
